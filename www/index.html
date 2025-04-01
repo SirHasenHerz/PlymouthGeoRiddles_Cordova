@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="libraries/p5.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="libraries/mappa.js"></script>
+    <script src="libraries/turf.min.js"></script>
+    <script src="libraries/hammer.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="buttonCont">
+            <div id="btnLink" class="buttons flex">
+                <input type="button" id="btn" value="✔" onclick="buttonPressed()">
+            </div>
+        </div>
+        <div id="overlayRiddlesCont">
+                <div id="box">
+                    <div id="boxCont">
+                    <h4 id="riddleText"></h4>
+                </div>
+                <div id="boxCont">
+                    <h4 id="hRiddle"></h4>
+                </div>
+                </div>
+        </div>
+        <div class="overlayCont">
+            <div id="overlayWin" onclick="overlayWindow()">
+                <div id="innerWin">
+                    <div class="pad">
+                        <div class="flex sect1">
+                            <img id="pLogo" src="data/img/pLogo.png">
+                        </div>
+                        <div class="flex sect2">
+                            <h1>Welcome to Plymouth Geo Riddles!</h1>
+                        </div>
+                        <div class="flex sect3">
+                            <h2></h2>
+                        </div>
+                        <div class="flex sect4 pulse">
+                            <h3>Swipe Left</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+</body>
+<script src="js/sketch.js"></script>
+
+</html>

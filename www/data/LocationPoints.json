@@ -1,0 +1,226 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 0,
+        "rid":"This monument stands tall and unimpeded and so should it, <b>LEST WE FORGET</b>."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.1422319412231445,
+          50.36542798492164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 1,
+        "rid":"This one has a few <b>LAYERS</b> to it, best solve it before they cut the <b>CAKE</b>."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.1444501,
+          50.364386
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 2,
+        "rid":"This one’s a little difficult. You may want to <b>CALL</b> for help."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.140408039093018,
+          50.365017354884905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 3,
+        "rid":"This Obelisk was erected in memory of fallen soldiers from Gloucestershire, Somerset and Devon. Come on don’t be a <b>BOER</b> give it a look."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.139539003372192,
+          50.36630398379175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 4,
+        "rid":"This monument stands as a constant reminder of fallen soldiers. Many people walk past it not understanding its <b>POINT</b>. Are you a <b>CUT</b> above the rest?"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.137951135635376,
+          50.366002861004006
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e§7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 5,
+        "rid":"This place has been called a cultural hub. It is old and grand it definitely needs a <b>SAVIOUR</b>. Search for the <b> WOODEN DOOR</b>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.136288166046143,
+          50.36592073627573
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 6,
+        "rid":"This <b>BRIDGES</b> the gap between land and sea. Hurry across so you don’t miss your <b>FERRY</b>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.134174585342407,
+          50.365715423833315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 7,
+        "rid":"Sitting enthroned high above, watching the sea and the creatures it's <b>ORIGINATED</b> from."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.133327007293701,
+          50.3663176711458
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 8,
+        "rid":"You wouldn’t expect to find a <b>MARKET</b> so old in such a <b>NEW STREET</b>."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.134834408760071,
+          50.36660510466881
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 9,
+        "rid":"Haddock! Cod! Get your <b>FISH</b> here I’ll let you MILL over your decision. But don’t take too long. I’ve got a <b>TRAIN</b> to catch."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.134657382965088,
+          50.36715943583246
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 10,
+        "rid":"Find a chimney that towers above. If you find it quickly you may just have time for a <b>G AND T</b>."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.137865304946899,
+          50.36780272560862
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 11,
+        "rid":"Sometimes artists when painting a <b>MURAL</b> needs a canvas the size of a <b>BUILDING</b>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.137414693832397,
+          50.3680217158832
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "n": 12,
+        "rid":"Wow you're doing great! We'll have to <b>IMPORT</b> some harder riddles"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.13611114025116,
+          50.36813121064151
+        ]
+      }
+    }
+  ]
+}

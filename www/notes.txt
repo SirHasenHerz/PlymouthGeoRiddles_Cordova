@@ -1,0 +1,49 @@
+App Ablauf
+
+
+
+Anfangsbildschirm
+mit Erklärtext
+
+- Button drücken zum weiter machen -
+
+[ if ] Spieler muss sich in die erste Zone bewegen, um erstes Rätsel angezeigt zu bekommen
+
+wenn Spieler noch nicht in der ersten Zone ist, wird ein Hinweis angezeigt, dass er in die Zone soll
+
+wenn der Spieler in der ersten Zone steht, wird das erste Rätsel angezeigt
+
+- Spieler versucht Rätsel zu lösen & bewegt sich an Ort, von dem er glaubt, dass es die Antwort ist -
+
+
+[es gibt 2 große Zonen: 	The Hoe		-	TheBB]
+[in der "The Hoe"- Zone gibt es [x] Rätsel & [x] Orte zu finden]
+
+wenn Spieler alle Rätsel & Orte in der ersten Zone erledigt hat -> muss er sich zunächst
+in die zweite Zone bewegen 
+
+
+
+
+
+
+
+was mich verwirrt:
+
+- moveme?!
+	was ist das? was macht es? wann kommt es zum einsatz? beschreibenderer Name
+	ab zeile 78
+
+-was macht "clear()"? zeile 315
+
+
+
+Notizen:
+	funtiondraw = entspricht Update funktion?
+	alles in functiondraw() passiert nur, wenn die Map geladen ist (mapLoaded == true)
+
+	& wenn mapZoomState == true ist
+		mapZoomState - wird beim Deklarieren am Anfang auf false gestellt
+		in function overlayWindow() auf true gestellt 
+		[wenn mapLoaded == true; wenn geoLoc == true; wenn travel == true]
+

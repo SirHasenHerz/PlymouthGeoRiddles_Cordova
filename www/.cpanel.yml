@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/jitexcng/public_html/
+    - /bin/cp -r * $DEPLOYPATH
