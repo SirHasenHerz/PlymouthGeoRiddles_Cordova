@@ -3,54 +3,79 @@
 
 <head>
     <meta charset="utf-8">
+
+    <!-- JS Libraries -->
     <script src="libraries/p5.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
     <script src="libraries/mappa.js"></script>
     <script src="libraries/turf.min.js"></script>
-    <script src="libraries/hammer.min.js"></script>
+
+    <!-- Ionic -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <div id="buttonCont">
-            <div id="btnLink" class="buttons flex">
-                <input type="button" id="btn" value="✔" onclick="buttonPressed()">
-            </div>
-        </div>
-        <div id="overlayRiddlesCont">
-                <div id="box">
-                    <div id="boxCont">
-                    <h4 id="riddleText"></h4>
-                </div>
-                <div id="boxCont">
-                    <h4 id="hRiddle"></h4>
-                </div>
-                </div>
-        </div>
-        <div class="overlayCont">
-            <div id="overlayWin" onclick="overlayWindow()">
+        
+        <div id="overlayContent">
+            <div id="overlayWindow">
                 <div id="innerWin">
-                    <div class="pad">
-                        <div class="flex sect1">
+
+                        <div class="UIScreen" id="startScreen">
                             <img id="pLogo" src="data/img/pLogo.png">
+                            <h1>Welcome to <br/> Plymouth Geo Riddles!</h1>
                         </div>
-                        <div class="flex sect2">
-                            <h1>Welcome to Plymouth Geo Riddles!</h1>
+                        <div class="UIScreen" id="instructionScreen" style="display:none;">
+                            <h2>The Aim of the Game</h2>
+                            <h3>Venture through the Plymouth Hoe and Barbican and explore your surroundings while solving riddles.<br/>
+                                To play, you need to find the building or location described in the riddles. 
+                                Once you think you found the solution, click the button to lock in your location as an answer.</h3>
+                            <h3>Good luck!</h3>
                         </div>
-                        <div class="flex sect3">
-                            <h2></h2>
+
+                        <div class="UIScreen" id="WinningScreen" style="display:none;">
+                                <h1>Congratulation!</h1>
+                                <h2>You solved all riddles.</h2>
                         </div>
-                        <div class="flex sect4 pulse">
-                            <h3>Swipe Left</h3>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
+
+        <div id="overlayRiddleContent">
+            <div id="riddleBox">
+                <p id="riddleText"></p>
+            </div>
+
+            <div class="buttons">
+                <ion-button id="buttonCheckLocation">Solve Riddle</ion-button>
+            </div>
+
+            <ion-fab slot="fixed" vertical="top" horizontal="start">
+                <ion-fab-button size="small">
+                    <ion-icon name="chevron-down-circle"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-list side="bottom">
+                    <ion-fab-button id="infoButton">
+                        <ion-icon name="help"></ion-icon>
+                    </ion-fab-button>
+                    <ion-fab-button id="restartButton">
+                        <ion-icon name="sync-outline"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab-list>
+            </ion-fab>
+
+        </div>
+
         <div id="map"></div>
     </div>
 </body>
-<script src="js/sketch.js"></script>
+
+<script type="module" src="js/sketch.js"></script>
+<script src="js/overlay.js"></script>
 
 </html>

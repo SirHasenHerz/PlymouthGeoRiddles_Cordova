@@ -1,397 +1,202 @@
-// Create a new Mappa instance
-const mappa = new Mappa('Leaflet');
+import {RiddleManager} from './riddleManager.js';
 
-let myMap;
-let mapLoaded;
 
-// Options for map
-const options = {
-    lat: 50.36544851633019,
-    lng: -4.142467975616455,
-    zoom: 7,
-    style: //"http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-    "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png"
-};
+    // Create a new Mappa instance
+    const mappa = new Mappa('Leaflet');
+    let myMap;
+    let mapLoaded;
 
-let canvas;
+    // Options for map
+    const options = {
+        lat: 50.36544851633019,
+        lng: -4.142467975616455,
+        zoom: 16,
+        style: //"http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+        "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png"
+    };
 
-let userMarker;
+    let canvas;
 
-let userTurfLocation;
-let userCoords;
+    let userMarker;
+    let userTurfLocation;
+    let wasUserInside = false;
 
-// polygon zones data - json
-let thehoe;
-let thebb;
-let zonePoly;
+    let riddleJSON;
+    // polygon zones data - json
+    let thehoe;
+    let thebb;
+    let zonePoly;
+    let zoneActive;
 
-let statePoints;
-var stateArray = [];
+    let riddleManager;
+    let riddleCounter = 0;
 
-let zoneActive;
-let zoneCheck = true;
-let zoneChange = false;
-
-let draggableCirc = [];
-// let userMarker;
-
-let distFromPoint;
-let soundStatus = true;
-let soundReset = false;
-let pointActive = true;
-
-let startActive = true;
-
-let userIcon;
-let geoLoc = false;
-
-let riddleCounter = 0;
-
-let tSound = new Audio('data/aud/true.ogg');
-let fSound = new Audio('data/aud/false.ogg')
-
-tSound.autoplay = true;
-fSound.autoplay = true;
-
-let mapZoomState = false;
-let buttonHide = document.getElementById('btn');
-buttonHide.style.display = "none";
-
-let introState = true;
-let travel = false;
-
-let width = window.innerWidth;
-let height = window.innerHeight;
+    let distFromPoint;
+    
+    let trueSound = new Audio('data/aud/true.ogg');
+    let falseSound = new Audio('data/aud/false.ogg');
 
 
 
-
-
-let overWin = document.getElementById('overlayWin');
-
-// Hammer.min.js = add touch gestures to your webapp
-let moveMe = new Hammer(overWin);
-
-// enabling all directions for the pan recognizers // hammer.js // because by default, it only adds horizontal recognizers
-moveMe.get('pan').set({ direction: Hammer.DIRECTION_ALL, threshold: width / 3 });
-
-// listen to events
-moveMe.on("panleft", function(e) {
-
-        if (!mapLoaded) return;
-        if (!introState) return;
-        introState = false;
-        let logo = document.getElementById('pLogo');
-        let title = document.getElementById('section1');
-        let sect3 = document.querySelector('.sect3');
-        sect3.style.display = "block"
-
-        document.querySelector("h1").innerHTML = "The Aim of the Game";
-        document.querySelector("h2").innerHTML = "Venture through the Plymouth Hoe and Barbican and solve the meanings behind the riddles that follow";
-        document.querySelector("h3").innerHTML = "Click to continue";
-
-        logo.style.display = "none";
-        travel = true;
-    });
-
-
-
-
-
-// This parses the JSON text file into a Javascript Object
-function preload() {
-    statePoints = loadJSON("data/LocationPoints.json");
-    thehoe = loadJSON("data/thehoe.json");
-    thebb = loadJSON("data/thebarbican.json");
-}
-
-function setup() {
-    canvas = createCanvas(windowWidth - 1, windowHeight - 1);
-    canvas.parent('map');
-
-    // Create a tile map and overlay the canvas on top
-    myMap = mappa.tileMap(options);
-    myMap.overlay(canvas, onMapLoaded);
-
-    if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(gotPosition);
-
-    }
-}
-
-
-
-function overlayWindow() {
-    if (!mapLoaded) return;
-    if (!geoLoc) return;
-    if (!travel) return;
-
-    let overlayWin = document.getElementById('overlayWin');
-    let overlay = document.querySelector('.overlayCont');
-    let buttonHide = document.getElementById('btn');
-    let riddlesCont = document.getElementById('overlayRiddlesCont');
-    //dieses Objekt gibt es nicht ????
-    let overRiddles = document.getElementById('overlayRiddles');
-
-    overlayWin.style.display = "none";
-    overlay.style.display = "none";
-    buttonHide.style.display = "block";
-    riddlesCont.style.display = "block";
-    mapZoomState = true;
-
-    myMap.map.setView([50.36544851633019, -4.142467975616455], 17, {
-        animate: true,
-        duration: 3,}
-    );
-}
-
-
-
-
-var circStyle = {
-    fillOpacity: 0,
-    weight: 0
-}
-
-class State {
-    constructor(active, coordinates, riddle) {
-        this.active = active;
-        this.coords = coordinates;
-        this.nextStates = [];
-        this.marker = null;
-        this.clues = riddle;
-        this.visited = false;
+const sketch = (p) => {  
+    // This parses the JSON text file into a Javascript Object
+    p.preload = () => {
+        riddleJSON = p.loadJSON("data/LocationPoints.json");
+        thehoe = p.loadJSON("data/thehoe.json");
+        thebb = p.loadJSON("data/thebarbican.json");
     }
 
-    addState(state) {
-        this.nextStates.push(state);
+    p.setup = () =>{
+        riddleManager = new RiddleManager(riddleJSON);
+
+        canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+        canvas.parent('map');
+
+        // Create a tile map and overlay the canvas on top
+        myMap = mappa.tileMap(options);
+        myMap.overlay(canvas, onMapLoaded);
+
+
+
+
+        /* DEBUG
+        // Browser GeoLocation
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(gotPosition);
+        } 
+
+        // Android Geolocation - Cordova plugin
+        document.addEventListener("deviceready", function() {
+            navigator.geolocation.watchPosition(gotPosition);
+        }); */
     }
 
-    addStates(states) {
-        for (var i = 0; i < states.length; i++) {
-            this.nextStates.push(states[i]);
+    p.draw = () => {
+        if (!mapLoaded || !userTurfLocation) return;
+        p.clear();
+
+        const checkUserInZone = turf.pointsWithinPolygon(userTurfLocation, zoneActive.features[0]);
+        const isUserInside = checkUserInZone.features.length > 0;
+
+        if (isUserInside !== wasUserInside) {
+            if (!isUserInside) {
+                zonePoly.openPopup();
+                document.getElementById('riddleBox').style.display = 'none';
+
+            } else {
+                zonePoly.closePopup();
+                document.getElementById('riddleBox').style.display = 'block';
+            }
+
+            wasUserInside = isUserInside;
         }
     }
 
-    setActive() {
-        if (this.visited == true) return;
-        if (this.active == true) return;
-        this.active = true;
-        this.marker = L.circle([this.coords[1], this.coords[0]], 0, circStyle );
+    p.windowResized = () => {
+        // work around - couldn't get map to resize properly
+        document.getElementsByClassName('leaflet-container')[0].style.width = '100vw';
+        document.getElementsByClassName('leaflet-container')[0].style.height = '100vh';
     }
+}
 
-    arrivedAt() {
-        this.visited = true;
-        this.active = false;
-        this.marker.remove();
-        riddleCounter++;
-        document.querySelector('#hRiddle').innerHTML = riddleCounter + "/13";
-        document.querySelector('#riddleText').innerHTML = "Riddle";
-        console.log(riddleCounter);
-        for (var i = 0; i < this.nextStates.length; i++) {
-            this.nextStates[i].setActive();
-        }
+new p5(sketch);
 
-    }
 
-    addClues(clue) {
-        this.clues.push(clue);
-    }
+function updateRiddleClue(riddles) {
+    let popupContent = riddles.map(riddle => `${riddle}`);
+    document.getElementById('riddleText').innerHTML = popupContent;
 }
 
 
 
-//in class it was keyPressed() - now using overlay callback
+// This function is called when the map is loaded and ready to be used. 
+// It sets up the map and adds the markers.
 function onMapLoaded() {
-    mapLoaded = true;
-
-    //storing all locations/states in an array
-    stateArray = [];
-    for (var i = 0; i < statePoints.features.length; i++) {
-        var state = new State(false, statePoints.features[i].geometry.coordinates, statePoints.features[i].properties.rid);
-        print(state);
-        stateArray.push(state);
-    }
-
-    //set next LocationPoints/next states
-    stateArray[0].addState(stateArray[1]);
-    stateArray[1].addState(stateArray[2]);
-    stateArray[2].addState(stateArray[3]);
-    stateArray[3].addState(stateArray[4]);
-    stateArray[4].addStates([stateArray[5], stateArray[10]]);
-    stateArray[10].addState(stateArray[11]);
-    stateArray[11].addState(stateArray[12]);
-    stateArray[5].addStates([stateArray[8], stateArray[6]]);
-    stateArray[6].addState(stateArray[7]);
-    stateArray[8].addState(stateArray[9]);
-    stateArray[12].addState(stateArray[5]);
-
-    stateArray[0].setActive();
-
     zoneActive = thehoe;
     drawZone();
 
-    userIcon = L.icon({
+    myMap.map.zoomControl.setPosition('topright');
+
+    let userIcon = L.icon({
         iconUrl: 'data/img/redpin.svg',
         iconSize: [38, 95],
         iconAnchor: [18, 75],
         popupAnchor: [1.5, -35],
     })
+    userMarker = L.marker([50.36800630462228, -4.142342515956734], { icon: userIcon }).addTo(myMap.map);
 
-    userMarker = L.marker([50.3655879, -4.1381954], { icon: userIcon }).addTo(myMap.map);
-    /*  userMarker.on({
-         mousedown: function() {
-             myMap.map.on('mousedown', function(e) {
-                 userMarker.setLatLng(e.latlng);
-                 draggableCirc = [e.latlng.lng, e.latlng.lat]
-             });
-         }
-     }); */
+    // DEBUG
+    userMarker.on({
+        mousedown: function() {
+            myMap.map.on('mousedown', function(e) {
+                gotPosition(e.latlng.lat, e.latlng.lng);
+            });
+
+        }
+    });
+
+
+    const activeClues = riddleManager.getActiveStates().map(state => state.clues);
+    updateRiddleClue(activeClues);
+
+
+    console.log("Map loaded");
+    mapLoaded = true;
+
 };
 
 function drawZone() {
-    //Set Zone for the first time
     zonePoly = L.geoJSON(zoneActive, {
         color: 'seagreen',
         opacity: 0.8
     }).addTo(myMap.map);
+
+    zonePoly.bindPopup('<b>Please walk in this area to begin your journey!</b>', { autoPan: false, closeOnClick: false });
+    zonePoly.openPopup();
 } 
 
-function gotPosition(position) {
-    print("Position Achieved");
+function gotPosition(latitude, longitude) {
     if (!mapLoaded) return;
+    userMarker.setLatLng([latitude, longitude]);
 
-    if (!userMarker) {
-        // Init user marker
-        userMarker = L.marker([position.coords.latitude, position.coords.longitude], { icon: userIcon }).addTo(myMap.map);
-    } else {
-        userMarker.setLatLng([position.coords.latitude, position.coords.longitude]);
-    }
-    
-    userCoords = L.GeoJSON.latLngToCoords(userMarker.getLatLng());
+
+    // Convert the LatLng to coordinates for turf.js
+    let userCoords = L.GeoJSON.latLngToCoords(userMarker.getLatLng());
     userTurfLocation = turf.point(userCoords);
-    geoLoc = true;
 }
 
-function buttonPressed() {
-    if (soundReset) {
-        tSound.pause();
-        tSound.currentTime = 0;
-        fSound.pause();
-        fSound.currentTime = 0;
-        soundReset = false;
-    }
-    soundStatus = true;
-    
-    for (var i = 0; i < stateArray.length; i++) {
-        //loop through each state array to check whether each state is active
-        if (stateArray[i].active == true) {
-            distFromPoint = 1000 * turf.distance(userTurfLocation, turf.point(stateArray[i].coords));
-            console.log(distFromPoint)
-            if (distFromPoint < 30) {
-                soundStatus = false;
-                stateArray[i].arrivedAt();               
-                break;
+
+document.getElementById('buttonCheckLocation').addEventListener('click', checkRiddleSolved);
+
+function checkRiddleSolved() {
+
+    riddleManager.getActiveStates().forEach(state => {
+        distFromPoint = 1000 * turf.distance(userTurfLocation, turf.point(state.coords));
+
+        if (distFromPoint < 30) {
+            riddleCounter++;
+            state.arrivedAt();
+            trueSound.play();
+
+            const activeClues = riddleManager.getActiveStates().map(state => state.clues);
+            updateRiddleClue(activeClues);
+
+
+            if (riddleManager.checkFirstZoneCompleted() && zoneActive !== thebb) {
+                zonePoly.remove();
+                zoneActive = thebb;
+                drawZone();
             }
+            return;
+        } else {
+            falseSound.play();
         }
+    });
+
+    if (riddleManager.stateArray[12].visited == true) {
+        document.getElementById('overlayContent').style.display = 'flex';
+        document.getElementById('WinningScreen').style.display = 'flex';
     }
     
-    for (let i = 0; i < 1; i++) {
-        if (!soundStatus) {
-            console.log('test');
-            tSound.play();
-            pointActive = true;
-        } else if (!pointActive || soundStatus) {
-                console.log(soundStatus);
-            fSound.play();
-            soundReset = true;
-        }
-    }
+
 }
-
-function draw() {
-    if (!mapLoaded || !mapZoomState) return;
-
-    clear();
-
-    // Check if the first zone is completed
-    zoneCheck = true;
-    for (i = 0; i < 5; i++) {
-        if (stateArray[i].visited == false) {
-            zoneCheck = false;
-        }
-    }
-
-    // If the first zone is completed, switch to the next zone
-    if (zoneCheck) {
-        if (!zoneChange) {
-            zoneChange = true;
-            zonePoly.remove();
-            zoneActive = thebb;
-            drawZone();
-        }
-    } else {
-        zoneActive = thehoe;
-    }
-
-    // Check if the user is inside the zone
-    const mouseChecker = turf.pointsWithinPolygon(userTurfLocation, zoneActive.features[0]);
-    const isMouseIn = mouseChecker.features.length > 0;
-
-    //draws and removes the markers
-    function enableMarker(enable) {
-        for (let i = 0; i < stateArray.length; i++) {
-            if (stateArray[i].marker) {
-                if (enable && stateArray[i].active) {
-                    stateArray[i].marker.addTo(myMap.map);
-                } else if (!enable) {
-                    stateArray[i].marker.remove();
-                }
-            }
-        }
-    }
-
-    let popupRiddle = [];
-    for (let i = 0; i < stateArray.length; i++) {
-        if (stateArray[i].active) {
-            popupRiddle.push(stateArray[i].clues);
-        }
-    }
-    zonePoly.bindPopup('<b>Please walk in this area to begin your journey!</b>', { autoPan: false });
-
-    if (!isMouseIn) {
-        enableMarker(false);
-        userMarker.closePopup();
-        userMarker.unbindPopup();
-    }
-
-    if (!isMouseIn && startActive) {
-        startActive = false;
-        zonePoly.openPopup();
-
-    } else if (isMouseIn) {
-        //If the Mouse is inside the zone
-        zonePoly.closePopup();
-        zonePoly.unbindPopup();
-
-        startActive = true;
-
-        enableMarker(true);
-
-        userMarker.openPopup();
-
-        if (pointActive) {
-            let arr = [];
-            for (let i = 0; i < popupRiddle.length; i++) {
-                //populate the array with active points
-                arr.push(popupRiddle[i]);
-                // add a break point after each riddle
-                arr.splice(i + popupRiddle.length, 0, "\</br><hr>\"");
-            }
-            //convert array into a string and then remove all double quotes
-            userMarker.bindPopup(arr.join("").replace(/["]+/g, ''), { autoPan: false, keepInView: true }).openPopup();
-                pointActive = false;
-            }
-        }
-        
-    }

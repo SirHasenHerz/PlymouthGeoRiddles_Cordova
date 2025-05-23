@@ -8,7 +8,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 0,
-        "rid":"This monument stands tall and unimpeded and so should it, <b>LEST WE FORGET</b>."
+        "riddleText":"This monument stands tall and unimpeded and so should it, <b>LEST WE FORGET</b>."
       },
       "geometry": {
         "type": "Point",
@@ -25,7 +25,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 1,
-        "rid":"This one has a few <b>LAYERS</b> to it, best solve it before they cut the <b>CAKE</b>."
+        "riddleText":"This one has a few <b>LAYERS</b> to it, best solve it before they cut the <b>CAKE</b>."
       },
       "geometry": {
         "type": "Point",
@@ -42,7 +42,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 2,
-        "rid":"This one’s a little difficult. You may want to <b>CALL</b> for help."
+        "riddleText":"This one’s a little difficult. You may want to <b>CALL</b> for help."
       },
       "geometry": {
         "type": "Point",
@@ -59,7 +59,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 3,
-        "rid":"This Obelisk was erected in memory of fallen soldiers from Gloucestershire, Somerset and Devon. Come on don’t be a <b>BOER</b> give it a look."
+        "riddleText":"This Obelisk was erected in memory of fallen soldiers from Gloucestershire, Somerset and Devon. Come on don’t be a <b>BOER</b> give it a look."
       },
       "geometry": {
         "type": "Point",
@@ -76,7 +76,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 4,
-        "rid":"This monument stands as a constant reminder of fallen soldiers. Many people walk past it not understanding its <b>POINT</b>. Are you a <b>CUT</b> above the rest?"
+        "riddleText":"This monument stands as a constant reminder of fallen soldiers. Many people walk past it not understanding its <b>POINT</b>. Are you a <b>CUT</b> above the rest?"
       },
       "geometry": {
         "type": "Point",
@@ -93,7 +93,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 5,
-        "rid":"This place has been called a cultural hub. It is old and grand it definitely needs a <b>SAVIOUR</b>. Search for the <b> WOODEN DOOR</b>"
+        "riddleText":"This place has been called a cultural hub. It is old and grand it definitely needs a <b>SAVIOUR</b>. Search for the <b> WOODEN DOOR</b>"
       },
       "geometry": {
         "type": "Point",
@@ -110,7 +110,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 6,
-        "rid":"This <b>BRIDGES</b> the gap between land and sea. Hurry across so you don’t miss your <b>FERRY</b>"
+        "riddleText":"This <b>BRIDGES</b> the gap between land and sea. Hurry across so you don’t miss your <b>FERRY</b>"
       },
       "geometry": {
         "type": "Point",
@@ -127,7 +127,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 7,
-        "rid":"Sitting enthroned high above, watching the sea and the creatures it's <b>ORIGINATED</b> from."
+        "riddleText":"Sitting enthroned high above, watching the sea and the creatures it's <b>ORIGINATED</b> from."
       },
       "geometry": {
         "type": "Point",
@@ -144,7 +144,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 8,
-        "rid":"You wouldn’t expect to find a <b>MARKET</b> so old in such a <b>NEW STREET</b>."
+        "riddleText":"You wouldn’t expect to find a <b>MARKET</b> so old in such a <b>NEW STREET</b>."
       },
       "geometry": {
         "type": "Point",
@@ -161,7 +161,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 9,
-        "rid":"Haddock! Cod! Get your <b>FISH</b> here I’ll let you MILL over your decision. But don’t take too long. I’ve got a <b>TRAIN</b> to catch."
+        "riddleText":"Haddock! Cod! Get your <b>FISH</b> here I’ll let you MILL over your decision. But don’t take too long. I’ve got a <b>TRAIN</b> to catch."
       },
       "geometry": {
         "type": "Point",
@@ -178,7 +178,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 10,
-        "rid":"Find a chimney that towers above. If you find it quickly you may just have time for a <b>G AND T</b>."
+        "riddleText":"Find a chimney that towers above. If you find it quickly you may just have time for a <b>G AND T</b>."
       },
       "geometry": {
         "type": "Point",
@@ -195,7 +195,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 11,
-        "rid":"Sometimes artists when painting a <b>MURAL</b> needs a canvas the size of a <b>BUILDING</b>"
+        "riddleText":"Sometimes artists when painting a <b>MURAL</b> needs a canvas the size of a <b>BUILDING</b>"
       },
       "geometry": {
         "type": "Point",
@@ -212,7 +212,7 @@
         "marker-size": "medium",
         "marker-symbol": "",
         "n": 12,
-        "rid":"Wow you're doing great! We'll have to <b>IMPORT</b> some harder riddles"
+        "riddleText":"Wow you're doing great! We'll have to <b>IMPORT</b> some harder riddles"
       },
       "geometry": {
         "type": "Point",
