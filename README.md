@@ -1,4 +1,4 @@
-# ReadMe
+# Plymouth GeoRiddles
 
 ## Description
 This project was originally created as a college project with two other fellow students.
